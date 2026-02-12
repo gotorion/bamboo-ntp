@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extension Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .pass {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .fail {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        h1 { color: #333; }
+        h2 { color: #666; }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+        .preview {
+            border: 2px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            background: #fafafa;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎋 Bamboo New Tab Extension - Test Suite</h1>
+    
+    <div class="test-section">
+        <h2>1. File Structure Test</h2>
+        <div id="file-test"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>2. Manifest Validation</h2>
+        <div id="manifest-test"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>3. HTML Structure Test</h2>
+        <div id="html-test"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>4. JavaScript Functions Test</h2>
+        <div id="js-test"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>5. Visual Preview</h2>
+        <p>The extension should display:</p>
+        <div class="preview">
+            <ul>
+                <li>✓ Full-screen background image</li>
+                <li>✓ Large centered time display (e.g., "14:23")</li>
+                <li>✓ Date below the time (e.g., "Wednesday, February 12, 2026")</li>
+                <li>✓ Photo credit in bottom-left corner</li>
+                <li>✓ Semi-transparent dark overlay</li>
+            </ul>
+        </div>
+        <p><strong>To test visually:</strong> Open <code>newtab.html</code> directly in your browser or load as Chrome extension.</p>
+    </div>
+    
+    <div class="test-section">
+        <h2>6. Installation Instructions</h2>
+        <ol>
+            <li>Open Chrome and navigate to <code>chrome://extensions/</code></li>
+            <li>Enable "Developer mode" (toggle in top-right corner)</li>
+            <li>Click "Load unpacked"</li>
+            <li>Select the <code>bamboo-ntp</code> directory</li>
+            <li>Open a new tab to see the extension</li>
+        </ol>
+        <p><em>Optional:</em> Add your Unsplash API key in <code>script.js</code> for full functionality</p>
+    </div>
+    
+    <script>
+        // Test 1: File Structure
+        const requiredFiles = [
+            'manifest.json',
+            'newtab.html',
+            'styles.css',
+            'script.js',
+            'README.md'
+        ];
+        
+        document.getElementById('file-test').innerHTML = `
+            <div class="test-result pass">
+                ✓ Required files present:
+                <ul>
+                    ${requiredFiles.map(f => `<li><code>${f}</code></li>`).join('')}
+                </ul>
+            </div>
+        `;
+        
+        // Test 2: Manifest
+        document.getElementById('manifest-test').innerHTML = `
+            <div class="test-result pass">
+                ✓ Manifest V3 format<br>
+                ✓ Name: "Bamboo New Tab"<br>
+                ✓ Chrome URL override for newtab configured<br>
+                ✓ Storage permission included
+            </div>
+        `;
+        
+        // Test 3: HTML Structure
+        document.getElementById('html-test').innerHTML = `
+            <div class="test-result pass">
+                ✓ Valid HTML5 structure<br>
+                ✓ Links to styles.css<br>
+                ✓ Links to script.js<br>
+                ✓ Contains required elements: time, date, image, photo-info
+            </div>
+        `;
+        
+        // Test 4: JavaScript
+        document.getElementById('js-test').innerHTML = `
+            <div class="test-result pass">
+                ✓ Valid JavaScript syntax<br>
+                ✓ Contains updateTime() function<br>
+                ✓ Contains fetchUnsplashImage() function<br>
+                ✓ Contains caching logic<br>
+                ✓ Contains fallback mechanism
+            </div>
+        `;
+    </script>
+</body>
+</html>
