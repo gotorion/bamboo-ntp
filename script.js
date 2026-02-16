@@ -1,9 +1,5 @@
-// Unsplash API configuration
-const UNSPLASH_ACCESS_KEY = 'YOUR_ACCESS_KEY_HERE'; // Users should replace this
-const UNSPLASH_API_URL = 'https://api.unsplash.com/photos/random';
-
-// Cache duration: 1 hour
-const CACHE_DURATION = 60 * 60 * 1000;
+// No longer needed to fetch from API directly
+// Background service worker handles daily downloads
 
 // Update time and date
 function updateTime() {
@@ -20,66 +16,34 @@ function updateTime() {
     document.getElementById('date').textContent = dateString;
 }
 
-// Fetch image from Unsplash
-async function fetchUnsplashImage() {
-    try {
-        const response = await fetch(
-            `${UNSPLASH_API_URL}?orientation=landscape&query=nature`,
-            {
-                headers: {
-                    'Authorization': `Client-ID ${UNSPLASH_ACCESS_KEY}`
-                }
-            }
-        );
-        
-        if (!response.ok) {
-            throw new Error('Failed to fetch from Unsplash');
-        }
-        
-        const data = await response.json();
-        
-        return {
-            imageUrl: data.urls.regular,
-            photographer: data.user.name,
-            photographerLink: data.user.links.html,
-            timestamp: Date.now()
-        };
-    } catch (error) {
-        console.error('Error fetching Unsplash image:', error);
+// Get next image from cache (rotates through cached images)
+async function getNextImageFromCache() {
+    const result = await chrome.storage.local.get(['cachedImages', 'currentImageIndex']);
+    
+    if (!result.cachedImages || result.cachedImages.length === 0) {
         return null;
     }
+    
+    const currentIndex = result.currentImageIndex || 0;
+    const image = result.cachedImages[currentIndex];
+    
+    // Update index for next load (rotate through images)
+    const nextIndex = (currentIndex + 1) % result.cachedImages.length;
+    await chrome.storage.local.set({ currentImageIndex: nextIndex });
+    
+    return image;
 }
 
-// Get cached image or fetch new one
+// Get image from local cache
 async function getImage() {
-    // Try to get cached image from storage
-    const result = await chrome.storage.local.get(['cachedImage']);
-    
-    if (result.cachedImage) {
-        const cached = result.cachedImage;
-        const now = Date.now();
-        
-        // Check if cache is still valid
-        if (now - cached.timestamp < CACHE_DURATION) {
-            return cached;
-        }
-    }
-    
-    // Fetch new image
-    const imageData = await fetchUnsplashImage();
+    // Get next image from cache (rotates through daily downloaded images)
+    const imageData = await getNextImageFromCache();
     
     if (imageData) {
-        // Cache the new image
-        await chrome.storage.local.set({ cachedImage: imageData });
         return imageData;
     }
     
-    // If fetch failed but we have cached data, use it anyway
-    if (result.cachedImage) {
-        return result.cachedImage;
-    }
-    
-    // Return fallback
+    // If no cached images available, use fallback
     return getFallbackImage();
 }
 
@@ -106,7 +70,8 @@ function displayImage(imageData) {
         img.classList.add('loaded');
     };
     
-    img.src = imageData.imageUrl;
+    // Use imageData (base64) if available, otherwise use imageUrl for fallback
+    img.src = imageData.imageData || imageData.imageUrl;
     photographerName.textContent = imageData.photographer;
     photographerLink.href = imageData.photographerLink + '?utm_source=bamboo-ntp&utm_medium=referral';
 }
