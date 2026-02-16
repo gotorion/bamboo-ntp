@@ -1,0 +1,65 @@
+╔══════════════════════════════════════════════════════════════════════════════════════╗
+║                                                                                      ║
+║                        ┌──────────────────────────────────────┐                     ║
+║                        │                                      │                     ║
+║                        │   Beautiful Unsplash Background      │                     ║
+║                        │        (Nature Landscape)            │                     ║
+║                        │                                      │                     ║
+║              ┌─────────┴──────────────────────────────────────┴─────────┐           ║
+║              │                                                           │           ║
+║              │              [Semi-transparent overlay]                  │           ║
+║              │                                                           │           ║
+║              │                                                           │           ║
+║              │                        15:47                              │           ║
+║              │                                                           │           ║
+║              │              Wednesday, February 12, 2026                 │           ║
+║              │                                                           │           ║
+║              │                                                           │           ║
+║              │                                                           │           ║
+║              └───────────────────────────────────────────────────────────┘           ║
+║                                                                                      ║
+║  Photo by John Doe on Unsplash                                                      ║
+║                                                                                      ║
+╚══════════════════════════════════════════════════════════════════════════════════════╝
+
+VISUAL HIERARCHY:
+═══════════════════════════════════════════════════════════════════════════════════════
+
+1. Background Layer:
+   └─ Full-screen Unsplash image (landscape orientation, nature theme)
+      └─ Object-fit: cover (fills entire viewport)
+
+2. Overlay Layer:
+   └─ Semi-transparent gradient (darker at bottom)
+      └─ Ensures text readability on any background
+
+3. Content Layer (Centered):
+   └─ Time Display: 120px font, white, centered
+   └─ Date Display: 24px font, white, centered below time
+   └─ Text shadow for visibility
+
+4. Attribution Layer (Bottom-Left):
+   └─ Photographer name (clickable link)
+   └─ "on Unsplash" link
+   └─ 14px font, white with shadow
+
+═══════════════════════════════════════════════════════════════════════════════════════
+
+ANIMATIONS:
+• Image fade-in (0.5s ease-in)
+• Smooth loading transition
+• Time updates every 1000ms (1 second)
+
+RESPONSIVE BEHAVIOR:
+• Adapts to any screen size
+• Maintains aspect ratio of images
+• Text remains centered and readable
+• Works on desktop, laptop, and large tablets
+
+PERFORMANCE:
+• Images cached for 1 hour
+• Minimal API calls
+• Fast load times
+• No blocking operations
+
+═══════════════════════════════════════════════════════════════════════════════════════

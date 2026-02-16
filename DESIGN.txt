@@ -1,0 +1,39 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║                        [Beautiful Unsplash Image]                            ║
+║                     (Full screen nature/landscape photo)                     ║
+║                                                                              ║
+║                                                                              ║
+║                                                                              ║
+║                                                                              ║
+║                                  14:23                                       ║
+║                      Wednesday, February 12, 2026                            ║
+║                                                                              ║
+║                                                                              ║
+║                                                                              ║
+║                                                                              ║
+║                                                                              ║
+║                                                                              ║
+║  Photo by [John Doe] on Unsplash                                            ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+FEATURES:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✓ Full-screen beautiful images from Unsplash
+✓ Real-time clock updates every second
+✓ Current date display
+✓ Clickable photographer attribution
+✓ Smart caching (1 hour) to minimize API calls
+✓ Smooth fade-in animations
+✓ Dark overlay for text readability
+✓ Responsive design
+✓ Fallback to Unsplash Source if no API key
+
+TECHNICAL DETAILS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Chrome Manifest V3
+• Uses Chrome Storage API for caching
+• Unsplash Random Photo API integration
+• CSS animations and gradients
+• No external dependencies
+• Privacy-focused (no tracking)

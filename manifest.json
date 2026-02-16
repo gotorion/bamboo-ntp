@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Bamboo New Tab",
+  "version": "1.0.0",
+  "description": "Replace your new tab page with beautiful pictures from Unsplash",
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "permissions": [
+    "storage"
+  ]
+}
