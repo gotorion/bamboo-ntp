@@ -33,7 +33,7 @@
 ### Method 2: Open HTML directly
 Simply open `newtab.html` in any web browser to see the layout and design.
 
-**Note**: The Unsplash API functionality requires a valid API key. Without it, the extension uses Unsplash Source as a fallback.
+**Note**: The Unsplash API functionality requires a valid API key. Without it, the extension uses Lorem Picsum as a fallback.
 
 ## Files:
 - `manifest.json` - Chrome extension configuration

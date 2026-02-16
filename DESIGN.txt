@@ -27,7 +27,7 @@ FEATURES:
 ✓ Smooth fade-in animations
 ✓ Dark overlay for text readability
 ✓ Responsive design
-✓ Fallback to Unsplash Source if no API key
+✓ Fallback to Lorem Picsum if no API key
 
 TECHNICAL DETAILS:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

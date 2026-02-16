@@ -29,7 +29,7 @@ Successfully implemented a complete Chrome extension that replaces the default n
    - Smart caching system (1-hour cache duration)
    - Real-time clock updates every second
    - Locale-aware date formatting
-   - Fallback to Unsplash Source if no API key
+   - Fallback to Lorem Picsum if no API key
    - Error handling and recovery
 
 ### Documentation Files
@@ -69,7 +69,7 @@ Successfully implemented a complete Chrome extension that replaces the default n
 ✅ **Smooth fade-in animations** for image loading
 ✅ **Dark overlay** for text readability on any background
 ✅ **Responsive design** that works on all screen sizes
-✅ **Fallback mechanism** using Unsplash Source if no API key provided
+✅ **Fallback mechanism** using Lorem Picsum if no API key provided
 ✅ **Privacy-focused** - no tracking, no data collection
 
 ## Technical Specifications
@@ -107,7 +107,7 @@ Successfully implemented a complete Chrome extension that replaces the default n
 
 ## Notes
 
-- **API Key**: While the extension works without an API key using Unsplash Source as fallback, adding a real Unsplash API key provides better functionality and proper attribution
+- **API Key**: While the extension works without an API key using Lorem Picsum as fallback, adding a real Unsplash API key provides better functionality and proper attribution
 - **Rate Limits**: Caching is implemented to stay well within Unsplash's rate limits
 - **Privacy**: Extension stores only image URLs locally; no user data collected
 - **Permissions**: Only requests storage permission; no access to browsing history or personal data

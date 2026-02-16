@@ -83,12 +83,12 @@ async function getImage() {
     return getFallbackImage();
 }
 
-// Fallback image (using Unsplash Source as fallback)
+// Fallback image (using Picsum as fallback since Unsplash Source is deprecated)
 function getFallbackImage() {
     return {
-        imageUrl: 'https://source.unsplash.com/random/1920x1080/?nature',
-        photographer: 'Unsplash',
-        photographerLink: 'https://unsplash.com',
+        imageUrl: 'https://picsum.photos/1920/1080',
+        photographer: 'Lorem Picsum',
+        photographerLink: 'https://picsum.photos',
         timestamp: Date.now()
     };
 }

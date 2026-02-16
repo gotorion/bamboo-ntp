@@ -31,7 +31,7 @@ To use the Unsplash API with your own API key:
 5. Replace `YOUR_ACCESS_KEY_HERE` with your actual Unsplash Access Key
 6. Follow the installation steps above
 
-**Note:** Without an API key, the extension will use Unsplash Source as a fallback, which still provides beautiful images but with limited functionality.
+**Note:** Without an API key, the extension will use Lorem Picsum as a fallback, which still provides beautiful images but with limited functionality.
 
 ## Usage
 
