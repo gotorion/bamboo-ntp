@@ -70,8 +70,8 @@ function displayImage(imageData) {
         img.classList.add('loaded');
     };
     
-    // Use imageData (base64) if available, otherwise use imageUrl for fallback
-    img.src = imageData.imageData || imageData.imageUrl;
+    // Use base64Data if available, otherwise use imageUrl for fallback
+    img.src = imageData.base64Data || imageData.imageUrl;
     photographerName.textContent = imageData.photographer;
     photographerLink.href = imageData.photographerLink + '?utm_source=bamboo-ntp&utm_medium=referral';
 }

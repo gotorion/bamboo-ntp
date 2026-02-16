@@ -30,7 +30,7 @@ async function downloadAndCacheImage() {
         const base64 = await blobToBase64(blob);
         
         return {
-            imageData: base64,
+            base64Data: base64,
             photographer: data.user.name,
             photographerLink: data.user.links.html,
             timestamp: Date.now(),
@@ -64,7 +64,7 @@ async function downloadDailyImages() {
         if (image) {
             images.push(image);
             // Small delay to avoid rate limiting
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            await new Promise(resolve => setTimeout(resolve, 300));
         }
     }
     
