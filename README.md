@@ -6,7 +6,9 @@ A beautiful Chrome extension that replaces your default new tab page with stunni
 
 - 🖼️ Beautiful high-quality images from Unsplash
 - 🕐 Clean clock and date display
-- 💾 Smart caching (images refresh every hour)
+- 💾 Smart image caching (downloads 5-10 images daily and stores them locally)
+- 🔄 Image rotation (each new tab shows a different cached image)
+- 🚀 Faster load times (images loaded from local cache, not internet)
 - 📸 Photo credits with links to photographers
 - 🎨 Elegant, minimalist design
 
@@ -27,7 +29,7 @@ To use the Unsplash API with your own API key:
 1. Go to [Unsplash Developers](https://unsplash.com/developers)
 2. Create a free account and register a new application
 3. Copy your Access Key
-4. Open `script.js` in this repository
+4. Open `background.js` in this repository
 5. Replace `YOUR_ACCESS_KEY_HERE` with your actual Unsplash Access Key
 6. Follow the installation steps above
 
@@ -36,20 +38,22 @@ To use the Unsplash API with your own API key:
 ## Usage
 
 Once installed, simply open a new tab in Chrome. You'll see:
-- A beautiful background image from Unsplash
+- A beautiful background image from Unsplash (loaded from local cache)
 - Current time and date
 - Photo credits at the bottom left
 
 The extension automatically:
 - Updates the time every second
-- Caches images for 1 hour to minimize API calls
-- Fetches a new random image when the cache expires
+- Downloads 7 new images daily (between 5-10 as optimized)
+- Stores images locally as base64 data for offline access
+- Rotates through cached images with each new tab
+- Refreshes the image cache once per day
 
 ## Configuration
 
-You can customize the extension by modifying `script.js`:
+You can customize the extension by modifying `background.js`:
 
-- **CACHE_DURATION**: Change how often images refresh (default: 1 hour)
+- **IMAGES_PER_DAY**: Change how many images to download daily (default: 7, recommended: 5-10)
 - **Image query**: Modify the `query` parameter in the API call (default: 'nature')
 - **Orientation**: Change from 'landscape' to 'portrait' or 'squarish'
 
@@ -58,6 +62,7 @@ You can customize the extension by modifying `script.js`:
 ```
 bamboo-ntp/
 ├── manifest.json      # Chrome extension configuration
+├── background.js      # Background service worker for daily downloads
 ├── newtab.html       # New tab page HTML
 ├── styles.css        # Styling for the new tab page
 ├── script.js         # Main JavaScript logic
@@ -73,11 +78,31 @@ To make changes to the extension:
 3. Click the reload icon on the Bamboo New Tab card
 4. Open a new tab to see your changes
 
+## How It Works
+
+### Daily Image Download
+- The extension uses a background service worker that runs independently
+- On first install and browser startup, it checks if images need to be downloaded
+- Every 24 hours, it automatically downloads 7 new images from Unsplash
+- Images are converted to base64 and stored in Chrome's local storage
+- This ensures images are available offline and load instantly
+
+### Image Rotation
+- Each time you open a new tab, the extension cycles to the next cached image
+- With 7 images cached, you'll see a different image for each new tab
+- The rotation loops back to the first image after showing all 7
+
+### Benefits
+- ⚡ **Faster Load Times**: Images load from local cache, not the internet
+- 🌐 **Offline Support**: Works even without internet connection (after initial download)
+- 📊 **Reduced API Calls**: Only 7 API calls per day instead of per-hour
+- 🔄 **Variety**: Different image with each new tab throughout the day
+
 ## Privacy
 
 This extension:
-- Only requests images from Unsplash
-- Stores image URLs locally using Chrome's storage API
+- Downloads images from Unsplash once per day
+- Stores images locally using Chrome's storage API
 - Does not collect or transmit any personal data
 - Does not track your browsing history
 

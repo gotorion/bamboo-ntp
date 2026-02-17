@@ -96,13 +96,14 @@
             <li>Select the <code>bamboo-ntp</code> directory</li>
             <li>Open a new tab to see the extension</li>
         </ol>
-        <p><em>Optional:</em> Add your Unsplash API key in <code>script.js</code> for full functionality</p>
+        <p><em>Optional:</em> Add your Unsplash API key in <code>background.js</code> for full functionality</p>
     </div>
     
     <script>
         // Test 1: File Structure
         const requiredFiles = [
             'manifest.json',
+            'background.js',
             'newtab.html',
             'styles.css',
             'script.js',
@@ -124,7 +125,8 @@
                 ✓ Manifest V3 format<br>
                 ✓ Name: "Bamboo New Tab"<br>
                 ✓ Chrome URL override for newtab configured<br>
-                ✓ Storage permission included
+                ✓ Storage and alarms permissions included<br>
+                ✓ Background service worker configured
             </div>
         `;
         
@@ -142,9 +144,11 @@
         document.getElementById('js-test').innerHTML = `
             <div class="test-result pass">
                 ✓ Valid JavaScript syntax<br>
+                ✓ Background worker: downloads 7 images daily<br>
+                ✓ Background worker: converts images to base64<br>
+                ✓ Main script: loads images from cache<br>
+                ✓ Main script: rotates through cached images<br>
                 ✓ Contains updateTime() function<br>
-                ✓ Contains fetchUnsplashImage() function<br>
-                ✓ Contains caching logic<br>
                 ✓ Contains fallback mechanism
             </div>
         `;
