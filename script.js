@@ -48,9 +48,10 @@ async function getImage() {
 }
 
 // Fallback image (using Picsum as fallback since Unsplash Source is deprecated)
+// Using 4K resolution (3840x2160) to ensure at least 4K quality
 function getFallbackImage() {
     return {
-        imageUrl: 'https://picsum.photos/1920/1080',
+        imageUrl: 'https://picsum.photos/3840/2160',
         photographer: 'Lorem Picsum',
         photographerLink: 'https://picsum.photos',
         timestamp: Date.now()
