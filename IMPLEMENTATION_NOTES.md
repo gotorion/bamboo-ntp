@@ -118,14 +118,14 @@ chrome.storage.local = {
 ## Storage Considerations
 
 ### Size Calculation
-- Average image size: ~500KB per image (base64 encoded)
-- 7 images: ~3.5MB total
-- Chrome storage.local quota: 10MB (plenty of room)
+- Average image size: ~1.2MB per image (base64 encoded, 4K resolution)
+- 7 images: ~8.4MB total
+- Chrome storage.local quota: 10MB (close to limit but sufficient)
 
 ### Cleanup
 - Old images automatically replaced daily
 - No manual cleanup needed
-- Storage stays consistent at ~3.5MB
+- Storage stays consistent at ~8.4MB
 
 ## Error Handling
 

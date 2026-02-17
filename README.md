@@ -4,7 +4,7 @@ A beautiful Chrome extension that replaces your default new tab page with stunni
 
 ## Features
 
-- 🖼️ Beautiful high-quality images from Unsplash
+- 🖼️ Beautiful 4K high-quality images from Unsplash
 - 🕐 Clean clock and date display
 - 💾 Smart image caching (downloads 5-10 images daily and stores them locally)
 - 🔄 Image rotation (each new tab shows a different cached image)

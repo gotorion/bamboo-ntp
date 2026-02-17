@@ -103,7 +103,7 @@ Successfully implemented a complete Chrome extension with **local image caching*
 | **API Calls/Day** | 24+ calls | 7 calls | **70% reduction** 📊 |
 | **Offline Support** | ❌ No | ✅ Yes | **New feature** 🌐 |
 | **Image Variety** | Same for 1 hour | Different per tab | **Better UX** 🎨 |
-| **Storage** | URLs only (~1KB) | Base64 data (~3.5MB) | Acceptable trade-off |
+| **Storage** | URLs only (~1KB) | Base64 data (~8.4MB for 4K images) | Acceptable trade-off |
 
 ## Security & Quality
 
@@ -141,7 +141,7 @@ Successfully implemented a complete Chrome extension with **local image caching*
 2. **Check**: Compares last download date with today
 3. **Download**: Fetches 7 random landscape nature images from Unsplash
 4. **Convert**: Transforms images to base64 encoding
-5. **Store**: Saves to chrome.storage.local (~3.5MB total)
+5. **Store**: Saves to chrome.storage.local (~8.4MB total for 4K images)
 6. **Schedule**: Sets next alarm for 24 hours later
 
 ### Image Rotation
@@ -166,7 +166,7 @@ Successfully implemented a complete Chrome extension with **local image caching*
 
 - **API Key**: Add your Unsplash API key in `background.js` for full functionality. Without it, the extension will use Lorem Picsum as fallback
 - **Rate Limits**: 300ms delay between downloads keeps well within Unsplash's rate limits
-- **Storage**: ~3.5MB for 7 cached images (well within Chrome's 10MB storage.local limit)
+- **Storage**: ~8.4MB for 7 cached 4K images (well within Chrome's 10MB storage.local limit)
 - **Privacy**: Extension stores only image data locally; no user data collected or transmitted
 - **Permissions**: Only requests storage and alarms permissions; no access to browsing history or personal data
 - **Offline**: After initial download, works completely offline until next daily refresh

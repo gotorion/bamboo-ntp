@@ -25,7 +25,9 @@ async function downloadAndCacheImage() {
         const data = await response.json();
         
         // Download the actual image and convert to base64
-        const imageResponse = await fetch(data.urls.regular);
+        // Use raw URL with 4K dimensions (3840x2160) to ensure at least 4K resolution
+        const imageUrl = `${data.urls.raw}&w=3840&h=2160&fit=crop`;
+        const imageResponse = await fetch(imageUrl);
         const blob = await imageResponse.blob();
         const base64 = await blobToBase64(blob);
         
