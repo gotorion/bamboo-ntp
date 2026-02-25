@@ -20,7 +20,7 @@ A beautiful Chrome extension that replaces your default new tab page with stunni
 2. Open Chrome and navigate to `chrome://extensions/`
 3. Enable "Developer mode" in the top right corner
 4. Click "Load unpacked"
-5. Select the `bamboo-ntp` directory
+5. Select the `src` directory inside the repository
 
 ### Option 2: Using Unsplash API (Recommended for full functionality)
 
@@ -61,12 +61,14 @@ You can customize the extension by modifying `background.js`:
 
 ```
 bamboo-ntp/
-├── manifest.json      # Chrome extension configuration
-├── background.js      # Background service worker for daily downloads
-├── newtab.html       # New tab page HTML
-├── styles.css        # Styling for the new tab page
-├── script.js         # Main JavaScript logic
-└── README.md         # This file
+├── src/
+│   ├── manifest.json      # Chrome extension configuration
+│   ├── background.js      # Background service worker for daily downloads
+│   ├── newtab.html       # New tab page HTML
+│   ├── styles.css        # Styling for the new tab page
+│   ├── script.js         # Main JavaScript logic
+│   └── test.html         # Manual test page
+└── README.md             # This file
 ```
 
 ## Development
