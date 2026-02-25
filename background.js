@@ -3,7 +3,7 @@ const UNSPLASH_ACCESS_KEY = 'YOUR_ACCESS_KEY_HERE';
 const UNSPLASH_API_URL = 'https://api.unsplash.com/photos/random';
 
 // Number of images to download per day
-const IMAGES_PER_DAY = 7; // Between 5-10 as requested
+const IMAGES_PER_DAY = 10;
 const ALARM_NAME = 'daily-image-download';
 
 // Download and cache a single image
@@ -121,10 +121,10 @@ chrome.runtime.onInstalled.addListener(async () => {
     await checkAndDownloadImages();
 });
 
-// Also check on startup
+// Prefetch fresh images every time the browser opens
 chrome.runtime.onStartup.addListener(async () => {
     console.log('Browser started');
-    await checkAndDownloadImages();
+    await downloadDailyImages();
 });
 
 // Check immediately when service worker starts

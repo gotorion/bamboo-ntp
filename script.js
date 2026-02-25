@@ -16,27 +16,21 @@ function updateTime() {
     document.getElementById('date').textContent = dateString;
 }
 
-// Get next image from cache (rotates through cached images)
+// Get a random image from cache
 async function getNextImageFromCache() {
-    const result = await chrome.storage.local.get(['cachedImages', 'currentImageIndex']);
+    const result = await chrome.storage.local.get(['cachedImages']);
     
     if (!result.cachedImages || result.cachedImages.length === 0) {
         return null;
     }
     
-    const currentIndex = result.currentImageIndex || 0;
-    const image = result.cachedImages[currentIndex];
-    
-    // Update index for next load (rotate through images)
-    const nextIndex = (currentIndex + 1) % result.cachedImages.length;
-    await chrome.storage.local.set({ currentImageIndex: nextIndex });
-    
-    return image;
+    const randomIndex = Math.floor(Math.random() * result.cachedImages.length);
+    return result.cachedImages[randomIndex];
 }
 
 // Get image from local cache
 async function getImage() {
-    // Get next image from cache (rotates through daily downloaded images)
+    // Get a random image from the prefetched cache
     const imageData = await getNextImageFromCache();
     
     if (imageData) {
