@@ -121,10 +121,10 @@ chrome.runtime.onInstalled.addListener(async () => {
     await checkAndDownloadImages();
 });
 
-// Also check on startup
+// Prefetch fresh images every time the browser opens
 chrome.runtime.onStartup.addListener(async () => {
     console.log('Browser started');
-    await checkAndDownloadImages();
+    await downloadDailyImages();
 });
 
 // Check immediately when service worker starts
