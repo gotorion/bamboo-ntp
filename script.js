@@ -1,6 +1,3 @@
-// No longer needed to fetch from API directly
-// Background service worker handles daily downloads
-
 // Update time and date
 function updateTime() {
     const now = new Date();
@@ -16,7 +13,7 @@ function updateTime() {
     document.getElementById('date').textContent = dateString;
 }
 
-// Get a random image from cache
+// Get image from local cache
 async function getNextImageFromCache() {
     const result = await chrome.storage.local.get(['cachedImages']);
     
@@ -26,19 +23,6 @@ async function getNextImageFromCache() {
     
     const randomIndex = Math.floor(Math.random() * result.cachedImages.length);
     return result.cachedImages[randomIndex];
-}
-
-// Get image from local cache
-async function getImage() {
-    // Get a random image from the prefetched cache
-    const imageData = await getNextImageFromCache();
-    
-    if (imageData) {
-        return imageData;
-    }
-    
-    // If no cached images available, use fallback
-    return getFallbackImage();
 }
 
 // Fallback image (using Picsum as fallback since Unsplash Source is deprecated)
@@ -78,7 +62,7 @@ async function init() {
     setInterval(updateTime, 1000);
     
     // Load and display image
-    const imageData = await getImage();
+    const imageData = (await getNextImageFromCache()) || getFallbackImage();
     displayImage(imageData);
 }
 

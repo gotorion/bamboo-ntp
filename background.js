@@ -77,8 +77,7 @@ async function downloadDailyImages() {
         // Store the new images
         await chrome.storage.local.set({
             cachedImages: images,
-            lastDownloadDate: new Date().toDateString(),
-            currentImageIndex: 0
+            lastDownloadDate: new Date().toDateString()
         });
         console.log(`Downloaded and cached ${images.length} images`);
     }
