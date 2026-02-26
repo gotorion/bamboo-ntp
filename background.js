@@ -3,7 +3,7 @@ const UNSPLASH_ACCESS_KEY = 'YOUR_ACCESS_KEY_HERE';
 const UNSPLASH_API_URL = 'https://api.unsplash.com/photos/random';
 
 // Number of images to download per day
-const IMAGES_PER_DAY = 10;
+const IMAGES_PER_DAY = 20;
 const ALARM_NAME = 'daily-image-download';
 
 // Download and cache a single image
@@ -57,39 +57,56 @@ function blobToBase64(blob) {
     });
 }
 
+// Clear old cached images from storage
+async function clearCachedImages() {
+    const result = await chrome.storage.local.get(['cachedImageCount']);
+    const oldCount = result.cachedImageCount || 0;
+
+    const keysToRemove = ['cachedImages']; // Also remove legacy array key
+    for (let i = 0; i < oldCount; i++) {
+        keysToRemove.push(`cachedImage_${i}`);
+    }
+
+    await chrome.storage.local.remove(keysToRemove);
+}
+
 // Download multiple images and update cache
 async function downloadDailyImages() {
     console.log('Starting daily image download...');
-    
-    const images = [];
-    
-    // Download IMAGES_PER_DAY images
+
+    // Clear old cached images first
+    await clearCachedImages();
+
+    let successCount = 0;
+
+    // Download IMAGES_PER_DAY images, store each individually
     for (let i = 0; i < IMAGES_PER_DAY; i++) {
         const image = await downloadAndCacheImage();
         if (image) {
-            images.push(image);
+            await chrome.storage.local.set({
+                [`cachedImage_${successCount}`]: image
+            });
+            successCount++;
             // Small delay to avoid rate limiting
             await new Promise(resolve => setTimeout(resolve, 300));
         }
     }
-    
-    if (images.length > 0) {
-        // Store the new images
-        await chrome.storage.local.set({
-            cachedImages: images,
-            lastDownloadDate: new Date().toDateString()
-        });
-        console.log(`Downloaded and cached ${images.length} images`);
-    }
+
+    // Update metadata
+    await chrome.storage.local.set({
+        cachedImageCount: successCount,
+        lastDownloadDate: new Date().toDateString()
+    });
+    console.log(`Downloaded and cached ${successCount} images`);
 }
 
 // Check if we need to download images today
 async function checkAndDownloadImages() {
-    const result = await chrome.storage.local.get(['lastDownloadDate', 'cachedImages']);
+    const result = await chrome.storage.local.get(['lastDownloadDate', 'cachedImageCount']);
     const today = new Date().toDateString();
     
     // Download if we haven't downloaded today or if there are no cached images
-    if (result.lastDownloadDate !== today || !result.cachedImages || result.cachedImages.length === 0) {
+    if (result.lastDownloadDate !== today || !result.cachedImageCount || result.cachedImageCount === 0) {
         await downloadDailyImages();
     }
 }
@@ -120,10 +137,10 @@ chrome.runtime.onInstalled.addListener(async () => {
     await checkAndDownloadImages();
 });
 
-// Prefetch fresh images every time the browser opens
+// Check and download images every time the browser opens
 chrome.runtime.onStartup.addListener(async () => {
     console.log('Browser started');
-    await downloadDailyImages();
+    await checkAndDownloadImages();
 });
 
 // Check immediately when service worker starts
