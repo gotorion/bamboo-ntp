@@ -13,16 +13,19 @@ function updateTime() {
     document.getElementById('date').textContent = dateString;
 }
 
-// Get image from local cache
+// Get image from local cache (loads only one image by index for fast retrieval)
 async function getNextImageFromCache() {
-    const result = await chrome.storage.local.get(['cachedImages']);
+    const result = await chrome.storage.local.get(['cachedImageCount']);
+    const count = result.cachedImageCount || 0;
     
-    if (!result.cachedImages || result.cachedImages.length === 0) {
+    if (count === 0) {
         return null;
     }
     
-    const randomIndex = Math.floor(Math.random() * result.cachedImages.length);
-    return result.cachedImages[randomIndex];
+    const randomIndex = Math.floor(Math.random() * count);
+    const imageKey = `cachedImage_${randomIndex}`;
+    const imageResult = await chrome.storage.local.get([imageKey]);
+    return imageResult[imageKey] || null;
 }
 
 // Fallback image (using Picsum as fallback since Unsplash Source is deprecated)
